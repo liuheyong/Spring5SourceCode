@@ -75,7 +75,6 @@ class CglibAopProxy implements AopProxy, Serializable {
 	private static final int INVOKE_EQUALS = 5;
 	private static final int INVOKE_HASHCODE = 6;
 
-
 	/** Logger available to subclasses; static to optimize serialization */
 	protected static final Log logger = LogFactory.getLog(CglibAopProxy.class);
 
@@ -138,12 +137,49 @@ class CglibAopProxy implements AopProxy, Serializable {
 		return getProxy(null);
 	}
 
+	protected Object createProxyClassAndInstance(Enhancer enhancer, Callback[] callbacks) {
+		enhancer.setInterceptDuringConstruction(false);
+		enhancer.setCallbacks(callbacks);
+		return (this.constructorArgs != null && this.constructorArgTypes != null ?
+				enhancer.create(this.constructorArgTypes, this.constructorArgs) :
+				enhancer.create());
+	}
+
+	/**
+	 * Creates the CGLIB {@link Enhancer}. Subclasses may wish to override this to return a custom
+	 * {@link Enhancer} implementation.
+	 */
+	protected Enhancer createEnhancer() {
+		return new Enhancer();
+	}
+
+	/**
+	 * Checks to see whether the supplied {@code Class} has already been validated and
+	 * validates it if not.
+	 */
+	private void validateClassIfNecessary(Class<?> proxySuperClass, @Nullable ClassLoader proxyClassLoader) {
+		if (logger.isWarnEnabled()) {
+			synchronized (validatedClasses) {
+				if (!validatedClasses.containsKey(proxySuperClass)) {
+					doValidateClass(proxySuperClass, proxyClassLoader,
+							ClassUtils.getAllInterfacesForClassAsSet(proxySuperClass));
+					validatedClasses.put(proxySuperClass, Boolean.TRUE);
+				}
+			}
+		}
+	}
+
+	/**
+	 * @Date:  2020-06-23
+	 * @Param:  [classLoader]
+	 * @return:  java.lang.Object
+	 * @Description:  创建cglib代理对象(最原始的了--enhancer)
+	 */
 	@Override
 	public Object getProxy(@Nullable ClassLoader classLoader) {
 		if (logger.isDebugEnabled()) {
 			logger.debug("Creating CGLIB proxy: target source is " + this.advised.getTargetSource());
 		}
-
 		try {
 			Class<?> rootClass = this.advised.getTargetClass();
 			Assert.state(rootClass != null, "Target class must be available for creating a CGLIB proxy");
@@ -195,38 +231,6 @@ class CglibAopProxy implements AopProxy, Serializable {
 		catch (Throwable ex) {
 			// TargetSource.getTarget() failed
 			throw new AopConfigException("Unexpected AOP exception", ex);
-		}
-	}
-
-	protected Object createProxyClassAndInstance(Enhancer enhancer, Callback[] callbacks) {
-		enhancer.setInterceptDuringConstruction(false);
-		enhancer.setCallbacks(callbacks);
-		return (this.constructorArgs != null && this.constructorArgTypes != null ?
-				enhancer.create(this.constructorArgTypes, this.constructorArgs) :
-				enhancer.create());
-	}
-
-	/**
-	 * Creates the CGLIB {@link Enhancer}. Subclasses may wish to override this to return a custom
-	 * {@link Enhancer} implementation.
-	 */
-	protected Enhancer createEnhancer() {
-		return new Enhancer();
-	}
-
-	/**
-	 * Checks to see whether the supplied {@code Class} has already been validated and
-	 * validates it if not.
-	 */
-	private void validateClassIfNecessary(Class<?> proxySuperClass, @Nullable ClassLoader proxyClassLoader) {
-		if (logger.isWarnEnabled()) {
-			synchronized (validatedClasses) {
-				if (!validatedClasses.containsKey(proxySuperClass)) {
-					doValidateClass(proxySuperClass, proxyClassLoader,
-							ClassUtils.getAllInterfacesForClassAsSet(proxySuperClass));
-					validatedClasses.put(proxySuperClass, Boolean.TRUE);
-				}
-			}
 		}
 	}
 

@@ -75,7 +75,6 @@ public class ClassPathBeanDefinitionScanner extends ClassPathScanningCandidateCo
 
 	private boolean includeAnnotationConfig = true;
 
-
 	/**
 	 * Create a new {@code ClassPathBeanDefinitionScanner} for the given bean factory.
 	 * @param registry the {@code BeanFactory} to load bean definitions into, in the form

@@ -105,11 +105,13 @@ public class ProxyFactory extends ProxyCreatorSupport {
 	 * @param classLoader the class loader to create the proxy with
 	 * (or {@code null} for the low-level proxy facility's default)
 	 * @return the proxy object
+	 *
+	 * 调用createAopProxy返回AopProxy的实现类，这个方法里面的getAopProxyFactory().createAopProxy(this)
+	 * 才是真正决定使用cglib还是jdk代理的核心代码，最本质上还是通过proxyTargetClass进行决定的，进入底层代码之后就一目了然了
 	 */
 	public Object getProxy(@Nullable ClassLoader classLoader) {
 		return createAopProxy().getProxy(classLoader);
 	}
-
 
 	/**
 	 * Create a new proxy for the given interface and interceptor.

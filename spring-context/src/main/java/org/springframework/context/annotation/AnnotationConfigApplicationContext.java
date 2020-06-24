@@ -56,7 +56,6 @@ public class AnnotationConfigApplicationContext extends GenericApplicationContex
 
 	private final ClassPathBeanDefinitionScanner scanner;
 
-
 	/**
 	 * Create a new AnnotationConfigApplicationContext that needs to be populated
 	 * through {@link #register} calls and then manually {@linkplain #refresh refreshed}.
@@ -99,7 +98,6 @@ public class AnnotationConfigApplicationContext extends GenericApplicationContex
 		refresh();
 	}
 
-
 	/**
 	 * Propagates the given custom {@code Environment} to the underlying
 	 * {@link AnnotatedBeanDefinitionReader} and {@link ClassPathBeanDefinitionScanner}.
@@ -138,7 +136,6 @@ public class AnnotationConfigApplicationContext extends GenericApplicationContex
 		this.scanner.setScopeMetadataResolver(scopeMetadataResolver);
 	}
 
-
 	//---------------------------------------------------------------------
 	// Implementation of AnnotationConfigRegistry
 	//---------------------------------------------------------------------
@@ -169,7 +166,6 @@ public class AnnotationConfigApplicationContext extends GenericApplicationContex
 		Assert.notEmpty(basePackages, "At least one base package must be specified");
 		this.scanner.scan(basePackages);
 	}
-
 
 	//---------------------------------------------------------------------
 	// Convenient methods for registering individual beans

@@ -24,7 +24,7 @@ import org.springframework.lang.Nullable;
 /**
  * Hibernate-specific subclass of UncategorizedDataAccessException,
  * for Hibernate system errors that do not match any concrete
- * {@code org.springframework.dao} exceptions.
+ * {@code org.springframework.myclass} exceptions.
  *
  * @author Juergen Hoeller
  * @since 4.2

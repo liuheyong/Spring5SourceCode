@@ -33,7 +33,6 @@ public class ProxyConfig implements Serializable {
 	/** use serialVersionUID from Spring 1.2 for interoperability */
 	private static final long serialVersionUID = -8409359707199703185L;
 
-
 	private boolean proxyTargetClass = false;
 
 	private boolean optimize = false;
@@ -43,7 +42,6 @@ public class ProxyConfig implements Serializable {
 	boolean exposeProxy = false;
 
 	private boolean frozen = false;
-
 
 	/**
 	 * Set whether to proxy the target class directly, instead of just proxying
@@ -145,7 +143,6 @@ public class ProxyConfig implements Serializable {
 	public boolean isFrozen() {
 		return this.frozen;
 	}
-
 
 	/**
 	 * Copy configuration from the other config object.

@@ -47,6 +47,12 @@ import org.springframework.aop.SpringProxy;
 public class DefaultAopProxyFactory implements AopProxyFactory, Serializable {
 
 	@Override
+	/**
+	* @Date:  2020-06-24
+	* @Param:  [config]
+	* @return:  org.springframework.aop.framework.AopProxy
+	* @Description:  真正的决定使用cglib还是jdk(JdkDynamicAopProxy和ObjenesisCglibAopProxy都实现了AopProxy)
+	*/
 	public AopProxy createAopProxy(AdvisedSupport config) throws AopConfigException {
 		if (config.isOptimize() || config.isProxyTargetClass() || hasNoUserSuppliedProxyInterfaces(config)) {
 			Class<?> targetClass = config.getTargetClass();

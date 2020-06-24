@@ -227,7 +227,7 @@ public class HibernateJpaDialect extends DefaultJpaDialect {
 
 	/**
 	 * Convert the given HibernateException to an appropriate exception
-	 * from the {@code org.springframework.dao} hierarchy.
+	 * from the {@code org.springframework.myclass} hierarchy.
 	 * @param ex HibernateException that occurred
 	 * @return the corresponding DataAccessException instance
 	 */

@@ -61,7 +61,7 @@ public class HibernateExceptionTranslator implements PersistenceExceptionTransla
 
 	/**
 	 * Convert the given HibernateException to an appropriate exception from the
-	 * {@code org.springframework.dao} hierarchy.
+	 * {@code org.springframework.myclass} hierarchy.
 	 * @param ex HibernateException that occurred
 	 * @return a corresponding DataAccessException
 	 * @see SessionFactoryUtils#convertHibernateAccessException

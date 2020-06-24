@@ -57,7 +57,7 @@ public class CustomSQLErrorCodesTranslation {
 	public void setExceptionClass(@Nullable Class<?> exceptionClass) {
 		if (exceptionClass != null && !DataAccessException.class.isAssignableFrom(exceptionClass)) {
 			throw new IllegalArgumentException("Invalid exception class [" + exceptionClass +
-					"]: needs to be a subclass of [org.springframework.dao.DataAccessException]");
+					"]: needs to be a subclass of [org.springframework.myclass.DataAccessException]");
 		}
 		this.exceptionClass = exceptionClass;
 	}

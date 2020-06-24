@@ -42,7 +42,7 @@ import org.springframework.util.Assert;
  * arguments. Subclasses should be JavaBeans, allowing easy configuration.
  *
  * <p>This class and subclasses throw runtime exceptions, defined in the
- * {@code org.springframework.dao} package (and as thrown by the
+ * {@code org.springframework.myclass} package (and as thrown by the
  * {@code org.springframework.jdbc.core} package, which the classes
  * in this package use under the hood to perform raw JDBC operations).
  *

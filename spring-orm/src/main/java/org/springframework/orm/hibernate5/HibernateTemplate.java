@@ -52,7 +52,7 @@ import org.springframework.util.ReflectionUtils;
 /**
  * Helper class that simplifies Hibernate data access code. Automatically
  * converts HibernateExceptions into DataAccessExceptions, following the
- * {@code org.springframework.dao} exception hierarchy.
+ * {@code org.springframework.myclass} exception hierarchy.
  *
  * <p>The central method is {@code execute}, supporting Hibernate access code
  * implementing the {@link HibernateCallback} interface. It provides Hibernate Session

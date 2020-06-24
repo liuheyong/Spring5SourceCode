@@ -66,7 +66,6 @@ final class JdkDynamicAopProxy implements AopProxy, InvocationHandler, Serializa
 	/** use serialVersionUID from Spring 1.2 for interoperability */
 	private static final long serialVersionUID = 5531744639992436476L;
 
-
 	/*
 	 * NOTE: We could avoid the code duplication between this class and the CGLIB
 	 * proxies by refactoring "invoke" into a template method. However, this approach
@@ -92,7 +91,6 @@ final class JdkDynamicAopProxy implements AopProxy, InvocationHandler, Serializa
 	 */
 	private boolean hashCodeDefined;
 
-
 	/**
 	 * Construct a new JdkDynamicAopProxy for the given AOP configuration.
 	 * @param config the AOP configuration as AdvisedSupport object
@@ -107,12 +105,17 @@ final class JdkDynamicAopProxy implements AopProxy, InvocationHandler, Serializa
 		this.advised = config;
 	}
 
-
 	@Override
 	public Object getProxy() {
 		return getProxy(ClassUtils.getDefaultClassLoader());
 	}
 
+	/**
+	 * @Date:  2020-06-23
+	 * @Param:  [classLoader]
+	 * @return:  java.lang.Object
+	 * @Description:  创建jdk代理对象(最原始的了--Proxy.newProxyInstance)
+	 */
 	@Override
 	public Object getProxy(@Nullable ClassLoader classLoader) {
 		if (logger.isDebugEnabled()) {

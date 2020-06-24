@@ -50,7 +50,6 @@ public class ProxyProcessorSupport extends ProxyConfig implements Ordered, BeanC
 
 	private boolean classLoaderConfigured = false;
 
-
 	/**
 	 * Set the ordering which will apply to this processor's implementation
 	 * of {@link Ordered}, used when applying multiple processors.
@@ -92,7 +91,6 @@ public class ProxyProcessorSupport extends ProxyConfig implements Ordered, BeanC
 		}
 	}
 
-
 	/**
 	 * Check the interfaces on the given bean class and apply them to the {@link ProxyFactory},
 	 * if appropriate.
@@ -105,8 +103,7 @@ public class ProxyProcessorSupport extends ProxyConfig implements Ordered, BeanC
 		Class<?>[] targetInterfaces = ClassUtils.getAllInterfacesForClass(beanClass, getProxyClassLoader());
 		boolean hasReasonableProxyInterface = false;
 		for (Class<?> ifc : targetInterfaces) {
-			if (!isConfigurationCallbackInterface(ifc) && !isInternalLanguageInterface(ifc) &&
-					ifc.getMethods().length > 0) {
+			if (!isConfigurationCallbackInterface(ifc) && !isInternalLanguageInterface(ifc) && ifc.getMethods().length > 0) {
 				hasReasonableProxyInterface = true;
 				break;
 			}
@@ -116,8 +113,7 @@ public class ProxyProcessorSupport extends ProxyConfig implements Ordered, BeanC
 			for (Class<?> ifc : targetInterfaces) {
 				proxyFactory.addInterface(ifc);
 			}
-		}
-		else {
+		} else {
 			proxyFactory.setProxyTargetClass(true);
 		}
 	}
