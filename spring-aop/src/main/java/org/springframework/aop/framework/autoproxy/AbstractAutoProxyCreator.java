@@ -108,7 +108,6 @@ public abstract class AbstractAutoProxyCreator extends ProxyProcessorSupport
 	 */
 	protected static final Object[] PROXY_WITHOUT_ADDITIONAL_INTERCEPTORS = new Object[0];
 
-
 	/** Logger available to subclasses */
 	protected final Log logger = LogFactory.getLog(getClass());
 
@@ -139,7 +138,6 @@ public abstract class AbstractAutoProxyCreator extends ProxyProcessorSupport
 	private final Map<Object, Class<?>> proxyTypes = new ConcurrentHashMap<>(16);
 
 	private final Map<Object, Boolean> advisedBeans = new ConcurrentHashMap<>(256);
-
 
 	/**
 	 * Set whether or not the proxy should be frozen, preventing advice
@@ -234,10 +232,17 @@ public abstract class AbstractAutoProxyCreator extends ProxyProcessorSupport
 		return null;
 	}
 
-	//获取早期的bean引用，通常是为了解决循环依赖
+	/**
+	* @Author: wenyixicodedog
+	* @Date:  2020-06-24
+	* @Param:  [bean, beanName]
+	* @return:  java.lang.Object
+	* @Description:  获取早期的bean引用，通常是为了解决循环依赖,这个时候这个bean依然是原生bean
+	*/
 	@Override
 	public Object getEarlyBeanReference(Object bean, String beanName) throws BeansException {
 		Object cacheKey = getCacheKey(bean.getClass(), beanName);
+		// TODO earlyProxyReferences里面缓存的都是代理对象生成之前提前暴露在这一层缓存的bean(只有这一个地方放入进去)
 		this.earlyProxyReferences.put(cacheKey, bean);
 		return wrapIfNecessary(bean, beanName, cacheKey);
 	}
@@ -302,7 +307,7 @@ public abstract class AbstractAutoProxyCreator extends ProxyProcessorSupport
 		if (bean != null) {
 			Object cacheKey = getCacheKey(bean.getClass(), beanName);
 			if (this.earlyProxyReferences.remove(cacheKey) != bean) {
-				//进行代理的生成 wrapIfNecessary
+				// TODO 如果没有提前进行aop的代理，则进行代理的生成 wrapIfNecessary
 				return wrapIfNecessary(bean, beanName, cacheKey);
 			}
 		}
@@ -325,8 +330,7 @@ public abstract class AbstractAutoProxyCreator extends ProxyProcessorSupport
 		if (StringUtils.hasLength(beanName)) {
 			return (FactoryBean.class.isAssignableFrom(beanClass) ?
 					BeanFactory.FACTORY_BEAN_PREFIX + beanName : beanName);
-		}
-		else {
+		} else {
 			return beanClass;
 		}
 	}

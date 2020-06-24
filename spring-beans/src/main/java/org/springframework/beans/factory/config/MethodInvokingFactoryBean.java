@@ -100,6 +100,13 @@ public class MethodInvokingFactoryBean extends MethodInvokingBean implements Fac
 		this.singleton = singleton;
 	}
 
+	/**
+	* @Author: wenyixicodedog
+	* @Date:  2020-06-24
+	* @Param:  []
+	* @return:  void
+	* @Description:
+	*/
 	@Override
 	public void afterPropertiesSet() throws Exception {
 		prepare();
@@ -108,7 +115,6 @@ public class MethodInvokingFactoryBean extends MethodInvokingBean implements Fac
 			this.singletonObject = invokeWithTargetException();
 		}
 	}
-
 
 	/**
 	 * Returns the same value each time if the singleton property is set
