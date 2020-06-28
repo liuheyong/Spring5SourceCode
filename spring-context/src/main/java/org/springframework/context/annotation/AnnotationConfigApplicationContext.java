@@ -82,8 +82,12 @@ public class AnnotationConfigApplicationContext extends GenericApplicationContex
 	 * e.g. {@link Configuration @Configuration} classes
 	 */
 	public AnnotationConfigApplicationContext(Class<?>... annotatedClasses) {
+		//  首先初始化Spring的7个内置Bean后置处理器，并放到DefaultListableBeanFactory类型的对象beanFactory中
+		//  创建Spring的注解解析器 Component
 		this();
+		// 传入的配置类annotatedClasses，生成BeanDefinition，然后将BeanDefinition注册到DefaultListableBeanFactory 类型的对象 beanFactory 中
 		register(annotatedClasses);
+		//刷新容器
 		refresh();
 	}
 

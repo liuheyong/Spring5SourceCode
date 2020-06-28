@@ -94,7 +94,6 @@ public class AnnotationConfigWebApplicationContext extends AbstractRefreshableWe
 
 	private final Set<String> basePackages = new LinkedHashSet<>();
 
-
 	/**
 	 * Set a custom {@link BeanNameGenerator} for use with {@link AnnotatedBeanDefinitionReader}
 	 * and/or {@link ClassPathBeanDefinitionScanner}.
@@ -252,7 +251,6 @@ public class AnnotationConfigWebApplicationContext extends AbstractRefreshableWe
 			}
 		}
 	}
-
 
 	/**
 	 * Build an {@link AnnotatedBeanDefinitionReader} for the given bean factory.

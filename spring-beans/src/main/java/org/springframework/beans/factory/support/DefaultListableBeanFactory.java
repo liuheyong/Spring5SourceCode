@@ -129,7 +129,6 @@ public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFacto
 		}
 	}
 
-
 	/** Map from serialized id to factory instance */
 	private static final Map<String, Reference<DefaultListableBeanFactory>> serializableFactories =
 			new ConcurrentHashMap<>(8);
@@ -176,7 +175,6 @@ public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFacto
 	/** Whether bean definition metadata may be cached for all beans */
 	private volatile boolean configurationFrozen = false;
 
-
 	/**
 	 * Create a new DefaultListableBeanFactory.
 	 */
@@ -191,7 +189,6 @@ public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFacto
 	public DefaultListableBeanFactory(@Nullable BeanFactory parentBeanFactory) {
 		super(parentBeanFactory);
 	}
-
 
 	/**
 	 * Specify an id for serialization purposes, allowing this BeanFactory to be
@@ -758,7 +755,7 @@ public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFacto
 					}
 				}
 				else {
-					//如果不是FactoryBean
+					// TODO 如果不是FactoryBean 进入到这个方法里面创建Bean
 					getBean(beanName);
 				}
 			}

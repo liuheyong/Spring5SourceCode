@@ -27,6 +27,8 @@ package org.springframework.context;
  * @see ApplicationEventPublisherAware
  * @see org.springframework.context.ApplicationEvent
  * @see org.springframework.context.event.EventPublicationInterceptor
+ *
+ * 支持事件驱动模型中的事件发布器，这些事件和Bean的生命周期的结合为Bean的管理提供了便利
  */
 @FunctionalInterface
 public interface ApplicationEventPublisher {

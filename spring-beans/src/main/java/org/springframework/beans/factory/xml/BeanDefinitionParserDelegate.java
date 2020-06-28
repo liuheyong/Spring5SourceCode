@@ -495,6 +495,8 @@ public class BeanDefinitionParserDelegate {
 	/**
 	 * Parse the bean definition itself, without regard to name or aliases. May return
 	 * {@code null} if problems occurred during the parsing of the bean definition.
+	 *
+	 * 解析xml文件标签
 	 */
 	@Nullable
 	public AbstractBeanDefinition parseBeanDefinitionElement(
@@ -512,37 +514,34 @@ public class BeanDefinitionParserDelegate {
 		}
 
 		try {
+			// 这里生成需要的BeanDefinition对象，为Bean定义信息的载入做准备
 			AbstractBeanDefinition bd = createBeanDefinition(className, parent);
-
+			// 1.解析<bean>元素属性
 			parseBeanDefinitionAttributes(ele, beanName, containingBean, bd);
+			//2.解析description
 			bd.setDescription(DomUtils.getChildElementValueByTagName(ele, DESCRIPTION_ELEMENT));
+			//对各种BEAN元素信息进行解析
+			parseMetaElements(ele, bd);// 3.解析<meta>子元素
+			parseLookupOverrideSubElements(ele, bd.getMethodOverrides());//4.解析<lookup-method>子元素
+			parseReplacedMethodSubElements(ele, bd.getMethodOverrides());//5.解析<replaced-method>子元素
 
-			parseMetaElements(ele, bd);
-			parseLookupOverrideSubElements(ele, bd.getMethodOverrides());
-			parseReplacedMethodSubElements(ele, bd.getMethodOverrides());
-
-			parseConstructorArgElements(ele, bd);
-			parsePropertyElements(ele, bd);
-			parseQualifierElements(ele, bd);
+			parseConstructorArgElements(ele, bd);//6.解析<constructor-arg>
+			parsePropertyElements(ele, bd);//7.解析<property>
+			parseQualifierElements(ele, bd);//8.解析<qualifier>
 
 			bd.setResource(this.readerContext.getResource());
 			bd.setSource(extractSource(ele));
 
 			return bd;
-		}
-		catch (ClassNotFoundException ex) {
+		} catch (ClassNotFoundException ex) {
 			error("Bean class [" + className + "] not found", ele, ex);
-		}
-		catch (NoClassDefFoundError err) {
+		} catch (NoClassDefFoundError err) {
 			error("Class that bean class [" + className + "] depends on not found", ele, err);
-		}
-		catch (Throwable ex) {
+		} catch (Throwable ex) {
 			error("Unexpected failure during bean definition parsing", ele, ex);
-		}
-		finally {
+		} finally {
 			this.parseState.pop();
 		}
-
 		return null;
 	}
 

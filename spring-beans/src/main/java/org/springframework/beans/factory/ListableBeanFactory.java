@@ -54,6 +54,8 @@ import org.springframework.lang.Nullable;
  * @since 16 April 2001
  * @see HierarchicalBeanFactory
  * @see BeanFactoryUtils
+ *
+ * 支持获取bean 工厂的所有bean实例
  */
 public interface ListableBeanFactory extends BeanFactory {
 

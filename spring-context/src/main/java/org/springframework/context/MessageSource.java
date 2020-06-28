@@ -36,6 +36,8 @@ import org.springframework.lang.Nullable;
  * @author Juergen Hoeller
  * @see org.springframework.context.support.ResourceBundleMessageSource
  * @see org.springframework.context.support.ReloadableResourceBundleMessageSource
+ *
+ * 提供一些国际化支持
  */
 public interface MessageSource {
 

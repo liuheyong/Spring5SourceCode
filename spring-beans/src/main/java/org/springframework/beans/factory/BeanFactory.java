@@ -121,7 +121,7 @@ public interface BeanFactory {
 	 * {@code myJndiObject} is a FactoryBean, getting {@code &myJndiObject}
 	 * will return the factory, not the instance returned by the factory.
 	 */
-	String FACTORY_BEAN_PREFIX = "&";
+	String FACTORY_BEAN_PREFIX = "&";//转定义符
 
 
 	/**
@@ -136,6 +136,7 @@ public interface BeanFactory {
 	 * @throws NoSuchBeanDefinitionException if there is no bean with the specified name
 	 * @throws BeansException if the bean could not be obtained
 	 */
+	 // TODO 定义5种获取Bean方法
 	Object getBean(String name) throws BeansException;
 
 	/**
@@ -226,7 +227,7 @@ public interface BeanFactory {
 	 * @param name the name of the bean to query
 	 * @return whether a bean with the given name is present
 	 */
-	boolean containsBean(String name);
+	boolean containsBean(String name);//判断容器是否含有指定名字的Bean
 
 	/**
 	 * Is this bean a shared singleton? That is, will {@link #getBean} always
@@ -243,7 +244,7 @@ public interface BeanFactory {
 	 * @see #getBean
 	 * @see #isPrototype
 	 */
-	boolean isSingleton(String name) throws NoSuchBeanDefinitionException;
+	boolean isSingleton(String name) throws NoSuchBeanDefinitionException; //查询指定名字的Bean是否是Singleton类型的Bean.
 
 	/**
 	 * Is this bean a prototype? That is, will {@link #getBean} always return
@@ -261,7 +262,7 @@ public interface BeanFactory {
 	 * @see #getBean
 	 * @see #isSingleton
 	 */
-	boolean isPrototype(String name) throws NoSuchBeanDefinitionException;
+	boolean isPrototype(String name) throws NoSuchBeanDefinitionException;//查询指定名字的Bean是否是Prototype类型的
 
 	/**
 	 * Check whether the bean with the given name matches the specified type.
@@ -278,7 +279,7 @@ public interface BeanFactory {
 	 * @see #getBean
 	 * @see #getType
 	 */
-	boolean isTypeMatch(String name, ResolvableType typeToMatch) throws NoSuchBeanDefinitionException;
+	boolean isTypeMatch(String name, ResolvableType typeToMatch) throws NoSuchBeanDefinitionException;//查询指定了名字的Bean的Class类型是否是特定的Class类型.
 
 	/**
 	 * Check whether the bean with the given name matches the specified type.
@@ -312,7 +313,7 @@ public interface BeanFactory {
 	 * @see #isTypeMatch
 	 */
 	@Nullable
-	Class<?> getType(String name) throws NoSuchBeanDefinitionException;
+	Class<?> getType(String name) throws NoSuchBeanDefinitionException;//查询指定名字的Bean的Class类型.
 
 	/**
 	 * Return the aliases for the given bean name, if any.
@@ -325,6 +326,6 @@ public interface BeanFactory {
 	 * @return the aliases, or an empty array if none
 	 * @see #getBean
 	 */
-	String[] getAliases(String name);
+	String[] getAliases(String name);//查询指定了名字的Bean的所有别名，这些都是在BeanDefinition中定义的
 
 }
