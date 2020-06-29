@@ -108,6 +108,8 @@ import org.springframework.util.CollectionUtils;
  * @see org.springframework.jdbc.core.JdbcTemplate
  * @see org.springframework.jdbc.datasource.DataSourceTransactionManager
  * @see org.springframework.transaction.jta.JtaTransactionManager
+ *
+ * 多数据库事务管理器（又叫做分布式事务管理器），其实现了JTA规范，使用XA协议进行两阶段提交
  */
 @SuppressWarnings("serial")
 public class JpaTransactionManager extends AbstractPlatformTransactionManager

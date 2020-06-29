@@ -37,6 +37,13 @@ import org.springframework.transaction.interceptor.TransactionInterceptor;
 @Configuration
 public class ProxyTransactionManagementConfiguration extends AbstractTransactionManagementConfiguration {
 
+	/**
+	 * @Author: wenyixicodedog
+	 * @Date:  2020-06-29
+	 * @Param:  []
+	 * @return:  org.springframework.transaction.interceptor.TransactionAttributeSource
+	 * @Description:  //定义事务增强器
+	 */
 	@Bean(name = TransactionManagementConfigUtils.TRANSACTION_ADVISOR_BEAN_NAME)
 	@Role(BeanDefinition.ROLE_INFRASTRUCTURE)
 	public BeanFactoryTransactionAttributeSourceAdvisor transactionAdvisor() {
@@ -49,12 +56,26 @@ public class ProxyTransactionManagementConfiguration extends AbstractTransaction
 		return advisor;
 	}
 
+	/**
+	* @Author: wenyixicodedog
+	* @Date:  2020-06-29
+	* @Param:  []
+	* @return:  org.springframework.transaction.interceptor.TransactionAttributeSource
+	* @Description:  //定义基于注解的事务属性资源
+	*/
 	@Bean
 	@Role(BeanDefinition.ROLE_INFRASTRUCTURE)
 	public TransactionAttributeSource transactionAttributeSource() {
 		return new AnnotationTransactionAttributeSource();
 	}
 
+	/**
+	* @Author: wenyixicodedog
+	* @Date:  2020-06-29
+	* @Param:  []
+	* @return:  org.springframework.transaction.interceptor.TransactionInterceptor
+	* @Description:  //定义事务拦截器
+	*/
 	@Bean
 	@Role(BeanDefinition.ROLE_INFRASTRUCTURE)
 	public TransactionInterceptor transactionInterceptor() {

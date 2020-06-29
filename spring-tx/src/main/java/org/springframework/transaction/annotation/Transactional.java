@@ -65,6 +65,8 @@ public @interface Transactional {
 	/**
 	 * Alias for {@link #transactionManager}.
 	 * @see #transactionManager
+	 *
+	 * 用户可手动指定事务的名称，当多个事务的时候，可区分使用哪个事务。
 	 */
 	@AliasFor("transactionManager")
 	String value() default "";
@@ -85,6 +87,8 @@ public @interface Transactional {
 	 * The transaction propagation type.
 	 * <p>Defaults to {@link Propagation#REQUIRED}.
 	 * @see org.springframework.transaction.interceptor.TransactionAttribute#getPropagationBehavior()
+	 *
+	 * 对事务的传播特性进行定义，共有7种类型。
 	 */
 	Propagation propagation() default Propagation.REQUIRED;
 
@@ -99,6 +103,8 @@ public @interface Transactional {
 	 * isolation level.
 	 * @see org.springframework.transaction.interceptor.TransactionAttribute#getIsolationLevel()
 	 * @see org.springframework.transaction.support.AbstractPlatformTransactionManager#setValidateExistingTransaction
+	 *
+	 * 为了解决数据库容易出现的并发问题，分级加锁处理策略。 对应注解中的属性isolation
 	 */
 	Isolation isolation() default Isolation.DEFAULT;
 
@@ -109,6 +115,8 @@ public @interface Transactional {
 	 * {@link Propagation#REQUIRES_NEW} since it only applies to newly started
 	 * transactions.
 	 * @see org.springframework.transaction.interceptor.TransactionAttribute#getTimeout()
+	 *
+	 * 定义一个事务执行过程多久算超时，以便超时后回滚。可以防止长期运行的事务占用资源.对应注解中的属性timeout
 	 */
 	int timeout() default TransactionDefinition.TIMEOUT_DEFAULT;
 
@@ -123,6 +131,8 @@ public @interface Transactional {
 	 * but rather silently ignore the hint.
 	 * @see org.springframework.transaction.interceptor.TransactionAttribute#isReadOnly()
 	 * @see org.springframework.transaction.support.TransactionSynchronizationManager#isCurrentTransactionReadOnly()
+	 *
+	 * 表示这个事务只读取数据但不更新数据, 这样可以帮助数据库引擎优化事务.对应注解中的属性readOnly
 	 */
 	boolean readOnly() default false;
 
@@ -159,6 +169,8 @@ public @interface Transactional {
 	 * <p>Similar to {@link org.springframework.transaction.interceptor.RollbackRuleAttribute#RollbackRuleAttribute(String exceptionName)}.
 	 * @see #rollbackFor
 	 * @see org.springframework.transaction.interceptor.DefaultTransactionAttribute#rollbackOn(Throwable)
+	 *
+	 * 回滚机制：定义遇到异常时回滚策略。
 	 */
 	String[] rollbackForClassName() default {};
 

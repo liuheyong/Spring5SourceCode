@@ -71,7 +71,6 @@ public class TransactionTemplate extends DefaultTransactionDefinition
 	@Nullable
 	private PlatformTransactionManager transactionManager;
 
-
 	/**
 	 * Construct a new TransactionTemplate for bean usage.
 	 * <p>Note: The PlatformTransactionManager needs to be set before
@@ -100,7 +99,6 @@ public class TransactionTemplate extends DefaultTransactionDefinition
 		super(transactionDefinition);
 		this.transactionManager = transactionManager;
 	}
-
 
 	/**
 	 * Set the transaction management strategy to be used.

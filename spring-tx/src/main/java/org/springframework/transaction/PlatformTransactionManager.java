@@ -42,6 +42,8 @@ import org.springframework.lang.Nullable;
  * @see org.springframework.transaction.support.TransactionTemplate
  * @see org.springframework.transaction.interceptor.TransactionInterceptor
  * @see org.springframework.transaction.interceptor.TransactionProxyFactoryBean
+ *
+ * 顶级接口定义了最核心的事务管理方法
  */
 public interface PlatformTransactionManager {
 
