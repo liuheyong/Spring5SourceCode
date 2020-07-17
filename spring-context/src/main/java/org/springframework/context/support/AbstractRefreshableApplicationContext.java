@@ -77,7 +77,6 @@ public abstract class AbstractRefreshableApplicationContext extends AbstractAppl
 	/** Synchronization monitor for the internal BeanFactory */
 	private final Object beanFactoryMonitor = new Object();
 
-
 	/**
 	 * Create a new AbstractRefreshableApplicationContext with no parent.
 	 */
@@ -91,7 +90,6 @@ public abstract class AbstractRefreshableApplicationContext extends AbstractAppl
 	public AbstractRefreshableApplicationContext(@Nullable ApplicationContext parent) {
 		super(parent);
 	}
-
 
 	/**
 	 * Set whether it should be allowed to override bean definitions by registering
@@ -113,7 +111,6 @@ public abstract class AbstractRefreshableApplicationContext extends AbstractAppl
 	public void setAllowCircularReferences(boolean allowCircularReferences) {
 		this.allowCircularReferences = allowCircularReferences;
 	}
-
 
 	/**
 	 * This implementation performs an actual refresh of this context's underlying
