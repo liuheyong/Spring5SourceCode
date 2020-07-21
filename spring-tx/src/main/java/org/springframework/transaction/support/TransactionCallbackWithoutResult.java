@@ -32,6 +32,13 @@ public abstract class TransactionCallbackWithoutResult implements TransactionCal
 
 	@Override
 	@Nullable
+	/**
+	* @Author: wenyixicodedog
+	* @Date:  2020-07-21
+	* @Param:  [status]
+	* @return:  java.lang.Object
+	* @Description:  bu带返回值的事务
+	*/
 	public final Object doInTransaction(TransactionStatus status) {
 		doInTransactionWithoutResult(status);
 		return null;

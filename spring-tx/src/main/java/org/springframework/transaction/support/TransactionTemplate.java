@@ -61,6 +61,13 @@ import org.springframework.util.Assert;
  * @see #setTransactionManager
  * @see org.springframework.transaction.PlatformTransactionManager
  */
+/**
+* @Author: wenyixicodedog
+* @Date:  2020-07-21
+* @Param:
+* @return:
+* @Description:  编程式事务的事务模板
+*/
 @SuppressWarnings("serial")
 public class TransactionTemplate extends DefaultTransactionDefinition
 		implements TransactionOperations, InitializingBean {
@@ -115,6 +122,13 @@ public class TransactionTemplate extends DefaultTransactionDefinition
 		return this.transactionManager;
 	}
 
+	/**
+	* @Author: wenyixicodedog
+	* @Date:  2020-07-21
+	* @Param:  []
+	* @return:  void
+	* @Description:  初始化的时候如果transactionManager为空，则抛出异常(说明transactionManager是在构造的时候注入的或者在构造之后初识化之前被赋值)
+	*/
 	@Override
 	public void afterPropertiesSet() {
 		if (this.transactionManager == null) {
@@ -122,23 +136,35 @@ public class TransactionTemplate extends DefaultTransactionDefinition
 		}
 	}
 
-
 	@Override
 	@Nullable
+	/**
+	* @Author: wenyixicodedog
+	* @Date:  2020-07-21
+	* @Param:  [action]
+	* @return:  T
+	* @Description: 1.getTransaction()获取事务
+	 * 2.doInTransaction()执行业务逻辑，这里就是用户自定义的业务代码。如果是没有返回值的，就是doInTransactionWithoutResult()
+	 * 3.commit()事务提交：调用AbstractPlatformTransactionManager的commit，rollbackOnException()异常回滚：调用AbstractPlatformTransactionManager的rollback()，事务提交回滚
+	*/
 	public <T> T execute(TransactionCallback<T> action) throws TransactionException {
 		Assert.state(this.transactionManager != null, "No PlatformTransactionManager set");
 
+		// 内部封装好的事务管理器(jta相关)
 		if (this.transactionManager instanceof CallbackPreferringPlatformTransactionManager) {
 			return ((CallbackPreferringPlatformTransactionManager) this.transactionManager).execute(this, action);
 		}
+		// 需要手动获取事务，执行方法，提交事务的管理器
+		// TODO  1.获取事务状态
 		else {
 			TransactionStatus status = this.transactionManager.getTransaction(this);
 			T result;
 			try {
+				// TODO  2.执行业务逻辑
 				result = action.doInTransaction(status);
 			}
 			catch (RuntimeException | Error ex) {
-				// Transactional code threw application exception -> rollback
+				// TODO  应用运行时异常 -> 回滚
 				rollbackOnException(status, ex);
 				throw ex;
 			}
@@ -147,6 +173,7 @@ public class TransactionTemplate extends DefaultTransactionDefinition
 				rollbackOnException(status, ex);
 				throw new UndeclaredThrowableException(ex, "TransactionCallback threw undeclared checked exception");
 			}
+			// TODO  3.事务提交
 			this.transactionManager.commit(status);
 			return result;
 		}
@@ -175,7 +202,6 @@ public class TransactionTemplate extends DefaultTransactionDefinition
 			throw ex2;
 		}
 	}
-
 
 	@Override
 	public boolean equals(Object other) {

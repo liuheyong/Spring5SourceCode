@@ -52,6 +52,13 @@ public interface TransactionCallback<T> {
 	 * @see CallbackPreferringPlatformTransactionManager#execute
 	 */
 	@Nullable
+	/**
+	* @Author: wenyixicodedog
+	* @Date:  2020-07-21
+	* @Param:  [status]
+	* @return:  T
+	* @Description:  带返回值的事务
+	*/
 	T doInTransaction(TransactionStatus status);
 
 }

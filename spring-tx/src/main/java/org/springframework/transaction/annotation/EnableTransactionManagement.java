@@ -150,6 +150,13 @@ import org.springframework.core.Ordered;
  * @see ProxyTransactionManagementConfiguration
  * @see org.springframework.transaction.aspectj.AspectJTransactionManagementConfiguration
  */
+/**
+* @Author: wenyixicodedog
+* @Date:  2020-07-21
+* @Param:
+* @return:
+* @Description:  开启事务注解
+*/
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
@@ -168,6 +175,7 @@ public @interface EnableTransactionManagement {
 	 * time. This approach has no negative impact in practice unless one is explicitly
 	 * expecting one type of proxy vs another, e.g. in tests.
 	 */
+	//proxyTargetClass = false表示是JDK动态代理支持接口代理。true表示是Cglib代理支持子类继承代理。
 	boolean proxyTargetClass() default false;
 
 	/**
@@ -180,6 +188,7 @@ public @interface EnableTransactionManagement {
 	 * scenario. For a more advanced mode of interception, consider switching this to
 	 * {@link AdviceMode#ASPECTJ}.
 	 */
+	//事务通知模式(切面织入方式)，默认代理模式（同一个类中方法互相调用拦截器不会生效），可以选择增强型AspectJ
 	AdviceMode mode() default AdviceMode.PROXY;
 
 	/**
@@ -187,6 +196,7 @@ public @interface EnableTransactionManagement {
 	 * when multiple advices are applied at a specific joinpoint.
 	 * <p>The default is {@link Ordered#LOWEST_PRECEDENCE}.
 	 */
+	//连接点上有多个通知时，排序，默认最低。值越大优先级越低。
 	int order() default Ordered.LOWEST_PRECEDENCE;
 
 }

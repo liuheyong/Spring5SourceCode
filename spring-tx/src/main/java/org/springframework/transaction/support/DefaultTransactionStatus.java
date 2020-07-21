@@ -64,7 +64,6 @@ public class DefaultTransactionStatus extends AbstractTransactionStatus {
 	@Nullable
 	private final Object suspendedResources;
 
-
 	/**
 	 * Create a new {@code DefaultTransactionStatus} instance.
 	 * @param transaction underlying transaction object that can hold state

@@ -129,7 +129,6 @@ public abstract class AbstractPlatformTransactionManager implements PlatformTran
 
 	private boolean rollbackOnCommitFailure = false;
 
-
 	/**
 	 * Set the transaction synchronization by the name of the corresponding constant
 	 * in this class, e.g. "SYNCHRONIZATION_ALWAYS".

@@ -48,7 +48,6 @@ public class DefaultTransactionDefinition implements TransactionDefinition, Seri
 	/** Marker for read-only transactions in description strings */
 	public static final String READ_ONLY_MARKER = "readOnly";
 
-
 	/** Constants instance for TransactionDefinition */
 	static final Constants constants = new Constants(TransactionDefinition.class);
 

@@ -103,7 +103,6 @@ public class WebSphereUowTransactionManager extends JtaTransactionManager
 	@Nullable
 	private String uowManagerName;
 
-
 	/**
 	 * Create a new WebSphereUowTransactionManager.
 	 */
@@ -119,7 +118,6 @@ public class WebSphereUowTransactionManager extends JtaTransactionManager
 		this();
 		this.uowManager = uowManager;
 	}
-
 
 	/**
 	 * Set the WebSphere UOWManager to use as direct reference.

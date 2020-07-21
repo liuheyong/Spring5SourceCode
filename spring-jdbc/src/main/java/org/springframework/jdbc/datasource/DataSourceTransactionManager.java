@@ -119,7 +119,6 @@ public class DataSourceTransactionManager extends AbstractPlatformTransactionMan
 
 	private boolean enforceReadOnly = false;
 
-
 	/**
 	 * Create a new DataSourceTransactionManager instance.
 	 * A DataSource has to be set to be able to use it.
