@@ -40,7 +40,6 @@ public class AspectJAfterThrowingAdvice extends AbstractAspectJAdvice
 		super(aspectJBeforeAdviceMethod, pointcut, aif);
 	}
 
-
 	@Override
 	public boolean isBeforeAdvice() {
 		return false;
