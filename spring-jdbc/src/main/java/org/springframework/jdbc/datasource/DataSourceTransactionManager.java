@@ -227,7 +227,6 @@ public class DataSourceTransactionManager extends AbstractPlatformTransactionMan
 		}
 	}
 
-
 	@Override
 	public Object getResourceFactory() {
 		return obtainDataSource();
@@ -235,10 +234,13 @@ public class DataSourceTransactionManager extends AbstractPlatformTransactionMan
 
 	@Override
 	protected Object doGetTransaction() {
+		//看下方列出的DataSourceTransactionManager构造函数，
+		//isNestedTransactionAllowed会返回true
+		//就是默认支持嵌套事务
+		//而嵌套事务又是采用savepoint实现的
 		DataSourceTransactionObject txObject = new DataSourceTransactionObject();
 		txObject.setSavepointAllowed(isNestedTransactionAllowed());
-		ConnectionHolder conHolder =
-				(ConnectionHolder) TransactionSynchronizationManager.getResource(obtainDataSource());
+		ConnectionHolder conHolder = (ConnectionHolder) TransactionSynchronizationManager.getResource(obtainDataSource());
 		txObject.setConnectionHolder(conHolder, false);
 		return txObject;
 	}
@@ -403,7 +405,6 @@ public class DataSourceTransactionManager extends AbstractPlatformTransactionMan
 		txObject.getConnectionHolder().clear();
 	}
 
-
 	/**
 	 * Prepare the transactional {@code Connection} right after transaction begin.
 	 * <p>The default implementation executes a "SET TRANSACTION READ ONLY" statement
@@ -418,8 +419,7 @@ public class DataSourceTransactionManager extends AbstractPlatformTransactionMan
 	 * @since 4.3.7
 	 * @see #setEnforceReadOnly
 	 */
-	protected void prepareTransactionalConnection(Connection con, TransactionDefinition definition)
-			throws SQLException {
+	protected void prepareTransactionalConnection(Connection con, TransactionDefinition definition) throws SQLException {
 
 		if (isEnforceReadOnly() && definition.isReadOnly()) {
 			Statement stmt = con.createStatement();
@@ -431,7 +431,6 @@ public class DataSourceTransactionManager extends AbstractPlatformTransactionMan
 			}
 		}
 	}
-
 
 	/**
 	 * DataSource transaction object, representing a ConnectionHolder.

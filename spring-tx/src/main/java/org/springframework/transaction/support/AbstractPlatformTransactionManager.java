@@ -325,7 +325,6 @@ public abstract class AbstractPlatformTransactionManager implements PlatformTran
 		return this.rollbackOnCommitFailure;
 	}
 
-
 	//---------------------------------------------------------------------
 	// Implementation of PlatformTransactionManager
 	//---------------------------------------------------------------------
@@ -408,7 +407,7 @@ public abstract class AbstractPlatformTransactionManager implements PlatformTran
 	}
 
 	/**
-	 * Create a TransactionStatus for an existing transaction.
+	 * 为现有事务创建一个TransactionStatus。
 	 */
 	private TransactionStatus handleExistingTransaction(
 			TransactionDefinition definition, Object transaction, boolean debugEnabled)
@@ -555,9 +554,7 @@ public abstract class AbstractPlatformTransactionManager implements PlatformTran
 	protected void prepareSynchronization(DefaultTransactionStatus status, TransactionDefinition definition) {
 		if (status.isNewSynchronization()) {
 			TransactionSynchronizationManager.setActualTransactionActive(status.hasTransaction());
-			TransactionSynchronizationManager.setCurrentTransactionIsolationLevel(
-					definition.getIsolationLevel() != TransactionDefinition.ISOLATION_DEFAULT ?
-							definition.getIsolationLevel() : null);
+			TransactionSynchronizationManager.setCurrentTransactionIsolationLevel(definition.getIsolationLevel() != TransactionDefinition.ISOLATION_DEFAULT ? definition.getIsolationLevel() : null);
 			TransactionSynchronizationManager.setCurrentTransactionReadOnly(definition.isReadOnly());
 			TransactionSynchronizationManager.setCurrentTransactionName(definition.getName());
 			TransactionSynchronizationManager.initSynchronization();
@@ -918,7 +915,7 @@ public abstract class AbstractPlatformTransactionManager implements PlatformTran
 
 			triggerAfterCompletion(status, TransactionSynchronization.STATUS_ROLLED_BACK);
 
-			// Raise UnexpectedRollbackException if we had a global rollback-only marker
+			// 如果我们有一个仅全局回滚的标记，则引发UnexpectedRollbackException
 			if (unexpectedRollback) {
 				throw new UnexpectedRollbackException(
 						"Transaction rolled back because it has been marked as rollback-only");

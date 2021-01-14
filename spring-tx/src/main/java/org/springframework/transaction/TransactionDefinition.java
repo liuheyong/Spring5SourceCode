@@ -133,7 +133,6 @@ public interface TransactionDefinition {
 	 */
 	int PROPAGATION_NESTED = 6;
 
-
 	/**
 	 * Use the default isolation level of the underlying datastore.
 	 * All other levels correspond to the JDBC isolation levels.
@@ -185,13 +184,11 @@ public interface TransactionDefinition {
 	 */
 	int ISOLATION_SERIALIZABLE = Connection.TRANSACTION_SERIALIZABLE;
 
-
 	/**
 	 * Use the default timeout of the underlying transaction system,
 	 * or none if timeouts are not supported.
 	 */
 	int TIMEOUT_DEFAULT = -1;
-
 
 	/**
 	 * Return the propagation behavior.
